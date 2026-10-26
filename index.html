@@ -713,7 +713,7 @@
   }
 
   if (freeze !== null || reduce) {
-    const T = freeze !== null ? parseFloat(freeze) : 2;
+    const T = freeze !== null ? Math.min(Math.max(parseFloat(freeze) || 0, 0), 30) : 2;   // clamp: ?t steps a loop
     for (let t = 0; t < T; t += 1 / 30) step(t, 1 / 30);
     renderer.render(scene, camera);
     new ResizeObserver(() => renderer.render(scene, camera)).observe(stage);
